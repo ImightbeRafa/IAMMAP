@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(geojsonData => {
             geojsonLayer = L.geoJSON(geojsonData, {
-                style: feature => ({ color: regionColors[feature.properties.name] || 'gray' }),
+                style: feature => ({ color: regionColors[feature.properties.name] || 'transparent' }),
                 onEachFeature: (feature, layer) => {
                     drawnItems.addLayer(layer);
                 }
