@@ -6,6 +6,11 @@ let regionColors = {};
 let isGeojsonLoaded = false;
 let locationComments = {}; // This was missing from globals
 
+const costaRicaBounds = L.latLngBounds(
+    L.latLng(8.0000, -85.0000), // Southwest
+    L.latLng(11.0000, -82.0000) // Northeast
+);
+
 // Load saved comments if any exist
 function loadSavedComments() {
     const saved = localStorage.getItem('locationComments');
@@ -30,12 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initializeMap() {
-    map = L.map('map').setView([9.7489, -83.7534], 7);
+    map = L.map('map', {
+        maxBounds: costaRicaBounds,
+        maxBoundsVisibilty: true,
+        minZoom: 7, // Minimum zoom level
+        maxZoom: 18 // Maximum zoom level
+    }).setView([9.7489, -83.7534], 7); // Centered on Costa Rica
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
     
     drawnItems = new L.FeatureGroup().addTo(map);
+    
+    // Prevent panning outside the bounds
+    map.setMaxBounds(costaRicaBounds);
 }
 
 function initializeControls() {
@@ -81,6 +95,13 @@ function initializeDrawEvents() {
 
 function handleDrawCreated(event) {
     const layer = event.layer;
+
+    // Check if the drawn layer is within Costa Rica's bounds
+    if (!costaRicaBounds.contains(layer.getBounds())) {
+        alert("You can only draw within Costa Rica!");
+        return; // Prevent adding the layer
+    }
+
     const locationId = Date.now().toString(); // Unique ID for the location
     layer.locationId = locationId; // Attach ID to layer
     drawnItems.addLayer(layer);
@@ -385,7 +406,15 @@ function initializeGeolocation() {
         navigator.geolocation.getCurrentPosition(
             position => {
                 const { latitude: userLat, longitude: userLng } = position.coords;
-                map.setView([userLat, userLng], 13);
+
+                // Check if user location is within Costa Rica bounds
+                if (!costaRicaBounds.contains([userLat, userLng])) {
+                    alert('You are outside Costa Rica. The map will center on Costa Rica.');
+                    map.setView([9.7489, -83.7534], 7); // Center to Costa Rica
+                } else {
+                    map.setView([userLat, userLng], 13);
+                }
+
                 L.marker([userLat, userLng], { icon: customIcon })
                     .addTo(map)
                     .bindPopup('You are here!')

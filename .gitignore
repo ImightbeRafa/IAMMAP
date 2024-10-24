@@ -1,2 +1,4 @@
 node_modules/
 public/maps
+__pycache__/
+venv/

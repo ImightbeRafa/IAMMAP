@@ -93,3 +93,10 @@ h1 {
     background-color: #fff; /* Light background for popups */
     color: #333; /* Dark text in popups */
 }
+
+.version {
+    font-size: 0.4em; /* Smaller font size */
+    color: #666; /* Light gray color for minimalism */
+    margin-left: 5px; /* Space between the title and version */
+    vertical-align: super; /* Align it slightly higher */
+}
