@@ -127,19 +127,22 @@ npm run deploy
 2. Crea tu rama de características (`git checkout -b feature/CaracteristicaIncreible`)
 3. Realiza tus cambios (`git commit -m 'Agregar alguna CaracteristicaIncreible'`)
 4. Sube la rama (`git push origin feature/CaracteristicaIncreible`)
-5. Abre un Pull Request
+5. Abre un Pull Request    
 
 ## Problemas Conocidos
 
-- Trabajando en asegurar la funcionalidad consistente entre diferentes tipos de formas
-- Mejorando la confiabilidad de la visualización de información de seguridad en formas guardadas
+- Mejorar la forma en la que se dibuja
+- Refactorizar el desastre 
+- Integracion de la base de datos en proceso.
+
+  Nada se guarda por el momento sigue en proceso. 
 
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles
 
 ## Contacto
-
+https://x.com/iamrafagarcia
 Enlace del Proyecto: [https://mrmap.xyz](https://mrmap.xyz)
 
 ## Agradecimientos
