@@ -1,52 +1,52 @@
 # MrMap
 
-[![Version](https://img.shields.io/badge/version-0.1.1-blue.svg)](https://mrmap.xyz)
+[![Versión](https://img.shields.io/badge/versión-0.1.1-blue.svg)](https://mrmap.xyz)
 
-MrMap is a web application that enables users to mark and share safety information about different areas in Costa Rica through an interactive mapping interface.
+MrMap es una aplicación web que permite a los usuarios marcar y compartir información sobre la seguridad de diferentes áreas en Costa Rica a través de una interfaz de mapeo interactiva.
 
-## Features
+## Características
 
-- 🗺️ Interactive map focused on Costa Rica with drawing tools
-- 🎨 Draw shapes (polygons, rectangles, circles) to mark areas
-- 🚦 Assign safety levels (green/yellow/red) to marked areas
-- 💬 Add and view comments on marked locations
-- 📍 Geocoding support for location search
-- 📱 User geolocation for easy navigation
-- 💾 Persistent storage of marked locations and comments
+- 🗺️ Mapa interactivo enfocado en Costa Rica con herramientas de dibujo
+- 🎨 Dibuja formas (polígonos, rectángulos, círculos) para marcar áreas
+- 🚦 Asigna niveles de seguridad (verde/amarillo/rojo) a las áreas marcadas
+- 💬 Agrega y visualiza comentarios en ubicaciones marcadas
+- 📍 Soporte de geocodificación para búsqueda de ubicaciones
+- 📱 Geolocalización del usuario para fácil navegación
+- 💾 Almacenamiento persistente de ubicaciones marcadas y comentarios
 
-## Prerequisites
+## Requisitos Previos
 
-- Node.js (v14 or higher)
-- MongoDB (v4.4 or higher)
-- npm or yarn package manager
+- Node.js (v14 o superior)
+- MongoDB (v4.4 o superior)
+- Gestor de paquetes npm o yarn
 
-## Installation
+## Instalación
 
-1. Clone the repository:
+1. Clonar el repositorio:
 ```bash
-git clone https://github.com/yourusername/mrmap.git
+git clone https://github.com/tunombre/mrmap.git
 cd mrmap
 ```
 
-2. Install dependencies:
+2. Instalar dependencias:
 ```bash
 npm install
 ```
 
-3. Create a `.env` file in the root directory with the following variables:
+3. Crear un archivo `.env` en el directorio raíz con las siguientes variables:
 ```
-MONGODB_URI=your_mongodb_connection_string
+MONGODB_URI=tu_cadena_de_conexion_mongodb
 PORT=3000
 ```
 
-4. Start the development server:
+4. Iniciar el servidor de desarrollo:
 ```bash
 npm run dev
 ```
 
-The application should now be running at `http://localhost:3000`
+La aplicación debería estar ejecutándose en `http://localhost:3000`
 
-## Project Structure
+## Estructura del Proyecto
 
 ```
 mrmap/
@@ -60,32 +60,32 @@ mrmap/
 └── README.md
 ```
 
-## Technical Details
+## Detalles Técnicos
 
-### Map Boundaries
-The application is bounded to Costa Rica's coordinates:
-- Southwest: `8.0000, -85.0000`
-- Northeast: `11.0000, -82.0000`
+### Límites del Mapa
+La aplicación está limitada a las coordenadas de Costa Rica:
+- Suroeste: `8.0000, -85.0000`
+- Noreste: `11.0000, -82.0000`
 
 ### Frontend
-- Leaflet.js for mapping functionality
-- leaflet-draw for shape drawing tools
-- Custom CSS variables for theming
-- Modern ES modules
+- Leaflet.js para la funcionalidad de mapeo
+- leaflet-draw para herramientas de dibujo de formas
+- Variables CSS personalizadas para temas
+- Módulos ES modernos
 
 ### Backend
-- Express.js server
-- MongoDB for data persistence
-- CORS enabled
-- Security headers implemented
+- Servidor Express.js
+- MongoDB para persistencia de datos
+- CORS habilitado
+- Cabeceras de seguridad implementadas
 
-### Database Schema
+### Esquema de Base de Datos
 
 ```javascript
-// Location Schema
+// Esquema de Ubicación
 {
   type: String,          // 'polygon', 'rectangle', 'circle'
-  coordinates: Array,    // Array of coordinates
+  coordinates: Array,    // Array de coordenadas
   safetyLevel: String,   // 'green', 'yellow', 'red'
   comments: [{
     text: String,
@@ -95,54 +95,54 @@ The application is bounded to Costa Rica's coordinates:
 }
 ```
 
-## Recent Updates (v0.1.1)
+## Actualizaciones Recientes (v0.1.1)
 
-- Fixed circle drawing functionality
-- Added About section
-- Implemented proper error handling
-- Improved UI/UX styling
-- Fixed issues with saved locations and comments
-- Added version checking and update notifications
+- Corrección de la funcionalidad de dibujo de círculos
+- Agregada sección Acerca de
+- Implementación de manejo adecuado de errores
+- Mejora del diseño UI/UX
+- Corrección de problemas con ubicaciones guardadas y comentarios
+- Agregada verificación de versión y notificaciones de actualización
 
-## Development
+## Desarrollo
 
-### Running Tests
+### Ejecutar Pruebas
 ```bash
 npm test
 ```
 
-### Building for Production
+### Compilar para Producción
 ```bash
 npm run build
 ```
 
-### Deployment
+### Despliegue
 ```bash
 npm run deploy
 ```
 
-## Contributing
+## Contribuir
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Haz un fork del repositorio
+2. Crea tu rama de características (`git checkout -b feature/CaracteristicaIncreible`)
+3. Realiza tus cambios (`git commit -m 'Agregar alguna CaracteristicaIncreible'`)
+4. Sube la rama (`git push origin feature/CaracteristicaIncreible`)
+5. Abre un Pull Request
 
-## Known Issues
+## Problemas Conocidos
 
-- Working on ensuring consistent functionality across different shape types
-- Improving reliability of safety information display on saved shapes
+- Trabajando en asegurar la funcionalidad consistente entre diferentes tipos de formas
+- Mejorando la confiabilidad de la visualización de información de seguridad en formas guardadas
 
-## License
+## Licencia
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles
 
-## Contact
+## Contacto
 
-Project Link: [https://mrmap.xyz](https://mrmap.xyz)
+Enlace del Proyecto: [https://mrmap.xyz](https://mrmap.xyz)
 
-## Acknowledgments
+## Agradecimientos
 
 - [Leaflet.js](https://leafletjs.com/)
 - [MongoDB](https://www.mongodb.com/)
