@@ -3,43 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Map of Costa Rica</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin=""/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
-    <link rel="stylesheet" href="/css/index.css"> <!-- Link to the new CSS file -->
+    <title>MrMap</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" crossorigin=""/>
+    <link rel="stylesheet" href="/css/index.css">
+
+    <!-- Fix for Leaflet.draw icons -->
+    <style>
+        .leaflet-draw-toolbar .leaflet-draw-draw-polygon { background-position: -31px -2px; }
+        .leaflet-draw-toolbar .leaflet-draw-draw-rectangle { background-position: -62px -2px; }
+        .leaflet-draw-toolbar .leaflet-draw-draw-circle { background-position: -92px -2px; }
+        .leaflet-draw-toolbar .leaflet-draw-edit-edit { background-position: -152px -2px; }
+        .leaflet-draw-toolbar .leaflet-draw-edit-remove { background-position: -182px -2px; }
+    </style>
 </head>
 <body>
-    <h1>Mr.Map <span class="version">v0.0.1</span></h1> <!-- Added version number next to the header -->
-    <div id="map"></div>
+    <div class="map-container">
+        <h1>Mr.Map <span class="version">v0.1.1</span></h1>
+        <button id="aboutButton" class="about-button" aria-label="About MrMap">
+            <i class="info-icon">ℹ</i>
+        </button>
+        <div id="map"></div>
+    </div>
 
-    <!-- Modal for safety level input -->
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content about-modal">
+            <span class="close">&times;</span>
+            <h2>About Mr.Map</h2>
+            
+            <div class="about-section">
+                <h3>Current Version</h3>
+                <p class="version-number">v0.1.1</p>
+                <p class="version-date">Last Updated: November 2024</p>
+            </div>
+
+            <div class="about-section">
+                <h3>Description</h3>
+                <p>Mr.Map is an interactive safety mapping tool for Costa Rica. Users can mark and share information about different areas, helping create a collaborative safety resource for travelers and residents.</p>
+            </div>
+
+            <div class="about-section">
+                <h3>Features</h3>
+                <ul class="feature-list">
+                    <li>✓ Interactive map drawing</li>
+                    <li>✓ Safety level indicators</li>
+                    <li>✓ Community comments</li>
+                    <li>✓ Real-time updates</li>
+                </ul>
+            </div>
+
+            <div class="about-section">
+                <h3>Upcoming Features</h3>
+                <ul class="upcoming-list">
+                    <li>🔜 User accounts</li>
+                    <li>🔜 Safety statistics</li>
+                    <li>🔜 Mobile app</li>
+                    <li>🔜 Offline support</li>
+                </ul>
+            </div>
+
+            <div class="about-section">
+                <h3>Contact</h3>
+                <p>For support or feedback, please contact us at: <a href="mailto:support@mrmap.xyz">support@mrmap.xyz</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Safety Level Modal -->
     <div id="safetyLevelModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Select Safety Level</h2>
-            <label for="safetyLevel">Choose a safety level:</label>
-            <select id="safetyLevel" class="safety-level-input">
-                <option value="">Select...</option>
-                <option value="green">Green</option>
-                <option value="yellow">Yellow</option>
-                <option value="red">Red</option>
-            </select>
-            <label for="safetyMessage">Leave a message:</label>
-            <textarea id="safetyMessage" rows="4" placeholder="Enter your message here..."></textarea>
-            <button id="submitSafetyLevel">Submit</button>
+            <div class="form-group">
+                <label for="safetyLevel">Choose a safety level:</label>
+                <select id="safetyLevel" class="safety-level-input" required>
+                    <option value="">Select...</option>
+                    <option value="green">Green - Safe</option>
+                    <option value="yellow">Yellow - Caution</option>
+                    <option value="red">Red - Danger</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="safetyMessage">Leave a message:</label>
+                <textarea id="safetyMessage"
+                    rows="4"
+                    placeholder="Enter your message here..."
+                    maxlength="500"
+                ></textarea>
+            </div>
+            <button id="submitSafetyLevel" class="btn-submit">Submit</button>
         </div>
     </div>
 
-    <div class="version">Version: 1.0.0</div> <!-- Added version number -->
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js" crossorigin=""></script>
+    <script src="/js/main.js" type="module"></script>
 
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    <script src="/js/main.js"></script>
+    <!-- Error handling -->
+    <div id="error-container" class="error-message" style="display: none;"></div>
+
+    <!-- Update notification container -->
+    <div id="updateNotification" class="update-notification" style="display: none;">
+        <p>A new version of Mr.Map is available!</p>
+        <button onclick="window.location.reload()">Refresh to Update</button>
+    </div>
 </body>
 </html>

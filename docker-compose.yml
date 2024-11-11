@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Database
+  mongodb:
+    image: mongo:latest
+    container_name: mrmap-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+
+  # Backend API
+  backend:
+    build: ./backend
+    container_name: mrmap-backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/mrmap
+      - PORT=3000
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
