@@ -1,0 +1,215 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #27ae60;
+    --warning-color: #f1c40f;
+    --danger-color: #e74c3c;
+    --white: #ffffff;
+    --shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.app-container {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Navigation */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+.nav-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.nav-controls {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#location-search {
+    width: 300px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* Map Container */
+.map-container {
+    height: calc(100vh - 60px);
+    margin-top: 60px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.nav-version {
+    font-size: 14px; /* Adjust the font size as needed */
+    color: #666; /* Optional: Change the color to a lighter shade */
+    margin-left: 10px; /* Space between the logo and version number */
+    align-self: center; /* Center vertically with the logo */
+}
+.base-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#draw-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Tools Panel */
+.tools-panel {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: var(--white);
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    z-index: 3;
+}
+
+.drawing-tools, .safety-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tool-btn, .safety-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tool-btn:hover {
+    background: var(--secondary-color);
+    color: var(--white);
+}
+
+.safety-btn[data-level="green"] {
+    background: var(--success-color);
+    color: var(--white);
+}
+
+.safety-btn[data-level="yellow"] {
+    background: var(--warning-color);
+}
+
+.safety-btn[data-level="red"] {
+    background: var(--danger-color);
+    color: var(--white);
+}
+
+.safety-btn.active {
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Brush Controls */
+.brush-controls {
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.brush-controls label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.brush-controls input[type="range"] {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#brush-size-value {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Additional styles */
+.hidden {
+    display: none; /* Utility class to hide elements */
+}
+
+.draw-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Prevent interactions with the canvas when not in brush mode */
+}
+
+.draw-layer.brush-mode {
+    cursor: crosshair;
+    pointer-events: auto;
+}
+
+.draw-layer.hand-mode {
+    cursor: grab;
+    pointer-events: none;
+}
+
+.tool-btn.active {
+    background: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tool-btn svg {
+    width: 20px;
+    height: 20px;
+}

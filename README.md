@@ -1,13 +1,13 @@
 # MrMap
 
-[![Versión](https://img.shields.io/badge/versión-0.1.1-blue.svg)](https://mrmap.xyz)
+[![Versión](https://img.shields.io/badge/versión-0.0.2-blue.svg)](https://mrmap.xyz)
 
 MrMap es una aplicación web que permite a los usuarios marcar y compartir información sobre la seguridad de diferentes áreas en Costa Rica a través de una interfaz de mapeo interactiva.
 
 ## Características
 
 - 🗺️ Mapa interactivo enfocado en Costa Rica con herramientas de dibujo
-- 🎨 Dibuja formas (polígonos, rectángulos, círculos) para marcar áreas
+- 🎨 Dibuja en un canva con un grid
 - 🚦 Asigna niveles de seguridad (verde/amarillo/rojo) a las áreas marcadas
 - 💬 Agrega y visualiza comentarios en ubicaciones marcadas
 - 📍 Soporte de geocodificación para búsqueda de ubicaciones
@@ -25,7 +25,7 @@ MrMap es una aplicación web que permite a los usuarios marcar y compartir infor
 1. Clonar el repositorio:
 ```bash
 git clone https://github.com/tunombre/mrmap.git
-cd mrmap
+cd IAMMAP
 ```
 
 2. Instalar dependencias:
@@ -37,11 +37,13 @@ npm install
 ```
 MONGODB_URI=tu_cadena_de_conexion_mongodb
 PORT=3000
+NODE_ENV=development
+FRONTEND_URL=http://localhost:3000
 ```
 
 4. Iniciar el servidor de desarrollo:
 ```bash
-npm run dev
+node server.js
 ```
 
 La aplicación debería estar ejecutándose en `http://localhost:3000`
@@ -49,29 +51,32 @@ La aplicación debería estar ejecutándose en `http://localhost:3000`
 ## Estructura del Proyecto
 
 ```
-mrmap/
+IAMMAP/
+│
 ├── public/
-│   ├── index.html
-│   ├── main.js
-│   └── index.css
-├── server/
-│   └── server.js
+    ├── image/
+│   │   └── favicon.ico   
+│   ├── css/
+│   │   └── styles.css
+│   ├── js/
+│   │   ├── app.js
+│   └── index.html
+│
+├── server.js
+├── .env
 ├── package.json
+├── package-lock.json
 └── README.md
 ```
 
 ## Detalles Técnicos
 
-### Límites del Mapa
-La aplicación está limitada a las coordenadas de Costa Rica:
-- Suroeste: `8.0000, -85.0000`
-- Noreste: `11.0000, -82.0000`
 
 ### Frontend
-- Leaflet.js para la funcionalidad de mapeo
-- leaflet-draw para herramientas de dibujo de formas
+- Iframe 
+- Brush tool
 - Variables CSS personalizadas para temas
-- Módulos ES modernos
+
 
 ### Backend
 - Servidor Express.js
@@ -79,30 +84,15 @@ La aplicación está limitada a las coordenadas de Costa Rica:
 - CORS habilitado
 - Cabeceras de seguridad implementadas
 
-### Esquema de Base de Datos
 
-```javascript
-// Esquema de Ubicación
-{
-  type: String,          // 'polygon', 'rectangle', 'circle'
-  coordinates: Array,    // Array de coordenadas
-  safetyLevel: String,   // 'green', 'yellow', 'red'
-  comments: [{
-    text: String,
-    timestamp: Date
-  }],
-  createdAt: Date
-}
-```
 
-## Actualizaciones Recientes (v0.1.1)
 
-- Corrección de la funcionalidad de dibujo de círculos
-- Agregada sección Acerca de
-- Implementación de manejo adecuado de errores
-- Mejora del diseño UI/UX
-- Corrección de problemas con ubicaciones guardadas y comentarios
-- Agregada verificación de versión y notificaciones de actualización
+## Actualizaciones Recientes (v0.0.2)
+
+- Cambios en la renderizacion del Mapa
+- UI styling mejorado
+- Base de datos con MongoDB
+-Dibujo Brush con un grid(Todavia no funciona)
 
 ## Desarrollo
 
@@ -131,22 +121,22 @@ npm run deploy
 
 ## Problemas Conocidos
 
-- Mejorar la forma en la que se dibuja
-- Refactorizar el desastre 
-- Integracion de la base de datos en proceso.
-
+- Mejorar la forma en la que se dibuja!
+- Refactorizar el desastre !
+- Integración de la base de datos en proceso.!
+  
   Nada se guarda por el momento sigue en proceso. 
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles
+No tengo denle con todo
 
 ## Contacto
-https://x.com/iamrafagarcia
+https://x.com/iamrafagarcia  
 Enlace del Proyecto: [https://mrmap.xyz](https://mrmap.xyz)
 
 ## Agradecimientos
 
-- [Leaflet.js](https://leafletjs.com/)
+- OpenstreetMap
 - [MongoDB](https://www.mongodb.com/)
 - [Express.js](https://expressjs.com/)
